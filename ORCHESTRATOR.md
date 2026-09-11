@@ -10,9 +10,10 @@ TERMS
 - POLL: `herdr agent get <name>` → working | blocked | idle | done.
 - VERIFY: run the app yourself, check every DOD line. RUNNER "done" is a claim; only you tick.
 - LOG: one line in `docs/log.md` under `## <today>`.
+- TOOL: `bin/<name>`, a short POSIX sh script whose whole definition lives in a prompt (this file or a plugin's RULES): `#!/bin/sh`, `set -eu`, usage in a comment, non-zero on bad args. Ignored by git, never committed: missing → write it from its definition, then run it; definition changed → rewrite. The prompt is the source, `bin/` a cache. Anything run more than once is a TOOL, never a retyped one-liner. The human allow-lists `Bash(bin/*)` once. Not app code.
 
 BOOTSTRAP
-- `mkdir -p tasks/{draft,todo,inprogress,done,fail} apps docs; echo 'apps/*' > .gitignore; [ -d .git ] || git init`
+- `mkdir -p tasks/{draft,todo,inprogress,done,fail} apps docs bin; printf 'apps/*\nbin/\n' > .gitignore; [ -d .git ] || git init`
 - `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`, each exactly: `Read ORCHESTRATOR.md in this folder and follow it. If your first prompt names a file under tasks/, you are a runner: do only that task and ignore ORCHESTRATOR.md.`
 - `docs/index.md`: frontmatter `okf_version: "0.1"`, table of docs/ files · `docs/log.md` (no frontmatter): `# Update Log`, `## <today>` · `docs/how-it-works.md`: frontmatter `type: reference`, BOARD, ROUND, TASK, DOD in your own words, under 40 lines.
 - BOARD empty → `tasks/draft/hello-cli.md`: "i want a tiny command line tool that greets the user by name. `hello Ilkka` prints `Hello, Ilkka!`. no name -> ask for one. any language, no dependencies. own git repo in apps/hello with a README."

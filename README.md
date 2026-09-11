@@ -15,7 +15,7 @@ Windows: WSL 2 with the checkout inside the WSL filesystem. Details and the sand
 
 ## The kit
 
-One file: `ORCHESTRATOR.md`, 37 lines, written as a term bank plus keyword lines. The first `run` builds the rest:
+One file: `ORCHESTRATOR.md`, 38 lines, written as a term bank plus keyword lines. The first `run` builds the rest:
 
 ```
 CLAUDE.md  AGENTS.md  .github/copilot-instructions.md    one line each: read ORCHESTRATOR.md
@@ -23,19 +23,20 @@ tasks/draft todo inprogress done fail                     the kanban board, move
 tasks/draft/hello-cli.md        your first task, written badly on purpose
 apps/                           where runners build, each app its own git repo
 docs/                           OKF bundle the orchestrator writes: index, log, how-it-works
+bin/                            TOOLs, git-ignored: scripts the prompts define, written the moment one is needed
 ```
 
-No scripts. No state file. No scaffold. The folder is the state, and the prompt knows how to make it.
+No scripts. No state file. No scaffold. The folder is the state, and the prompt knows how to make it. Anything the herd runs more than once is a TOOL: its whole definition is a line in a prompt, the orchestrator writes it into `bin/` when it is first needed and rewrites it when the line changes. Nothing but prompts in git; one allow rule covers every plugin, and no agent ever edits its own permissions.
 
-`docs/` in this repo is reading material for you: `runners.md`, `sandboxing.md`, `hack-ideas.md`. `plugins/` holds five plugins, each one prompt file that installs itself as a single git commit and uninstalls with `git revert`.
+`docs/` in this repo is reading material for you: `runners.md`, `sandboxing.md`, `hack-ideas.md`. `plugins/` holds six plugins, each one prompt file that installs itself as a single git commit and uninstalls with `git revert`.
 
 ## The evening
 
-1. **Copy `ORCHESTRATOR.md`** into an empty folder of your own. Nothing else.
+1. **Copy `ORCHESTRATOR.md`** into an empty folder of your own. Claude Code as orchestrator: also `.claude/settings.json` with `{"permissions":{"allow":["Bash(bin/*)"]}}` — the one rule the TOOLs need, and the classifier will not let an agent write it. Nothing else.
 2. **Start herdr**: `herdr --session workshop`. Inside it, `cd` to your folder and start your harness: `claude`, `copilot` or `codex`. Answer the harness's "trust this folder?" question first; a prompt typed before that is lost.
 3. **Type `run`.** Watch the orchestrator build the folder, rewrite `hello-cli.md` into a real task, open a pane, start a runner. Type `run` again when the runner is idle. It verifies by running your app and moves the file to `done/` or `fail/`.
 4. **Write your own draft.** Three rough lines in `tasks/draft/`. `run`.
-5. **Add a plugin.** Say `read <path>/plugins/canary.md and execute`. The prompt installs itself: copies into `plugins/`, wires the pointer files, writes a registry file under `docs/plugins/`, commits once. `run` now prints `PLUGIN OK canary`. Say `remove plugin canary`: one `git revert`, gone. Then the real ones: `visualize`, `traceability`, `sandbox-claude`, `sandbox-copilot`.
+5. **Add a plugin.** Say `read <path>/plugins/canary.md and execute`. The prompt installs itself: copies into `plugins/`, wires the pointer files, writes a registry file under `docs/plugins/`, commits once. `run` now prints `PLUGIN OK canary`. Say `remove plugin canary`: one `git revert`, gone. Then the real ones: `visualize`, `traceability`, `sandbox-claude`, `sandbox-copilot`. `canvas` is different: it installs a task, a runner builds the server and page, and from then on every round posts to a browser tab at `127.0.0.1:7778`.
 6. **Hack.** Write your own plugin from `docs/hack-ideas.md`. Same shape: INSTALL, REMOVE, RULES, one file.
 
 ## What to notice

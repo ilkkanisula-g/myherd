@@ -8,7 +8,7 @@ description: Ways to grow the kit once the loop runs, roughly in order of payoff
 Write each as a plugin: one file with INSTALL (file changes, one commit), REMOVE (`git revert` of that commit), RULES (in ORCHESTRATOR.md terms). `plugins/canary.md` is the template. Each of these is one evening or less. Keep `ORCHESTRATOR.md` under 60 lines; put detail in `docs/` and link it from `docs/index.md`.
 
 1. **A human gate.** Only you move `draft/ → todo/`. The orchestrator writes the concrete task but stops there. Now nothing runs that you did not read.
-2. **A launch script.** `bin/runner.sh <task> <kind>` that does the tab, the wait, the start, the trust dialog and the prompt. Four gotchas in `runners.md`, solved once.
+2. **A launch TOOL.** `bin/launch <task> <kind>` that does the tab, the wait, the start, the trust dialog and the prompt. Four gotchas in `runners.md`, solved once, and one allow rule covers it.
 3. **Evidence.** Before `pane close`, copy the runner's transcript next to the task: `tasks/done/<task>/session.jsonl`. Now you can see what it did.
 4. **Retries.** `fail/` items get a `## Fix` section and go back to `todo/` as attempt 2. Cap at 3.
 5. **Parallel by dependency.** Add `after: <task>` to frontmatter; only launch when that task is in `done/`.

@@ -6,7 +6,7 @@ summary: claude runners confined by Claude Code's own sandbox
 
 INSTALL (this session, once; "read plugins/sandbox-claude.md and execute")
 1. Tree dirty → `git add -A && git commit -qm "pre-plugin sandbox-claude"`.
-2. Pointer files (`CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`) lack the line → append to each: `Orchestrator only: also apply RULES of every plugins/*.md.`; `mkdir -p plugins docs/plugins`; `docs/index.md` row: `plugins/` — installed plugins, one registry file each. Commit alone: `git commit -qam "plugins: enable"`. This commit is never reverted.
+2. Pointer files (`CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`) lack the line → append to each: `Orchestrator only: also apply RULES of every plugins/*.md.`; `mkdir -p plugins docs/plugins bin`; `.gitignore` lacks `bin/` → append it; `docs/index.md` row: `plugins/` — installed plugins, one registry file each. Commit alone: `git commit -qam "plugins: enable"`. This commit is never reverted.
 3. Copy this file to `plugins/sandbox-claude.md`.
 4. `docs/how-it-works.md` += one line: runners of kind claude run under Claude Code's sandbox; see plugins/sandbox-claude.md.
 5. Registry `docs/plugins/sandbox-claude.md`: frontmatter `type: plugin`, `title: sandbox-claude`, `installed: <today>`, `commit: "plugin: sandbox-claude — claude runners confined by Claude Code's own sandbox"`; body: one line, what it changed.

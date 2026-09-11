@@ -6,7 +6,7 @@ summary: prove plugins load and unload
 
 INSTALL (this session, once; "read plugins/canary.md and execute")
 1. Tree dirty → `git add -A && git commit -qm "pre-plugin canary"`.
-2. Pointer files (`CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`) lack the line → append to each: `Orchestrator only: also apply RULES of every plugins/*.md.`; `mkdir -p plugins docs/plugins`; `docs/index.md` row: `plugins/` — installed plugins, one registry file each. Commit alone: `git commit -qam "plugins: enable"`. This commit is never reverted.
+2. Pointer files (`CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`) lack the line → append to each: `Orchestrator only: also apply RULES of every plugins/*.md.`; `mkdir -p plugins docs/plugins bin`; `.gitignore` lacks `bin/` → append it; `docs/index.md` row: `plugins/` — installed plugins, one registry file each. Commit alone: `git commit -qam "plugins: enable"`. This commit is never reverted.
 3. Copy this file to `plugins/canary.md`.
 4. Nothing else.
 5. Registry `docs/plugins/canary.md`: frontmatter `type: plugin`, `title: canary`, `installed: <today>`, `commit: "plugin: canary — prove plugins load and unload"`; body: one line, what it changed.

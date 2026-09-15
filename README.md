@@ -1,5 +1,12 @@
 # myherd — build your own orchestrator
 
+<p align="center">
+  <img src="docs/concept.svg" width="900"
+       alt="Rough notes from you land in tasks/draft. The orchestrator reads herd.md, shapes each note into a task with a DoD, moves it across the folder board with mv, and launches one runner agent per task in its own herdr pane. The runner's done is only a claim; the orchestrator runs the app itself against every DoD line before it ticks a box, then writes at most one fact back to herd.md.">
+</p>
+
+**Rough notes in, working apps out, and nothing believed until it runs.** That picture is the whole kit: a folder is the board, a prompt is the orchestrator, each task gets an agent in its own pane, and `herd.md` is the only thing it remembers between rounds.
+
 An evening. One folder, one prompt, one terminal multiplexer. By the end you have an agent that plans work from your rough notes and hands each task to another agent in its own pane, then checks the result. Everything after that is yours to hack.
 
 ## Before you come

@@ -15,20 +15,21 @@ Windows: WSL 2 with the checkout inside the WSL filesystem. Details and the sand
 
 ## The kit
 
-One file: `ORCHESTRATOR.md`, 38 lines, written as a term bank plus keyword lines. The first `run` builds the rest:
+One file: `ORCHESTRATOR.md`, 40 lines, written as a term bank plus keyword lines. The first `run` builds the rest:
 
 ```
 CLAUDE.md  AGENTS.md  .github/copilot-instructions.md    one line each: read ORCHESTRATOR.md
 tasks/draft todo inprogress done fail                     the kanban board, moved with mv
 tasks/draft/hello-cli.md        your first task, written badly on purpose
+herd.md                         who this herd is, in its own words, then the facts it keeps: 30 at most, pruned as it writes
 apps/                           where runners build, each app its own git repo
 docs/                           OKF bundle the orchestrator writes: index, log, how-it-works
 bin/                            TOOLs, git-ignored: scripts the prompts define, written the moment one is needed
 ```
 
-No scripts. No state file. No scaffold. The folder is the state, and the prompt knows how to make it. Anything the herd runs more than once is a TOOL: its whole definition is a line in a prompt, the orchestrator writes it into `bin/` when it is first needed and rewrites it when the line changes. Nothing but prompts in git; one allow rule covers every plugin, and no agent ever edits its own permissions.
+No scripts. No scaffold. No state but the folder itself, and the prompt knows how to make it — including `herd.md`, which the orchestrator writes about itself on the first run and prunes back to 30 facts on every one after. Anything the herd runs more than once is a TOOL: its whole definition is a line in a prompt, the orchestrator writes it into `bin/` when it is first needed and rewrites it when the line changes. Nothing but prompts in git; one allow rule covers every plugin, and no agent ever edits its own permissions.
 
-`docs/` in this repo is reading material for you: `runners.md`, `sandboxing.md`, `hack-ideas.md`. `plugins/` holds six plugins, each one prompt file that installs itself as a single git commit and uninstalls with `git revert`.
+`docs/` in this repo is reading material for you: `runners.md`, `sandboxing.md`, `hack-ideas.md`. `plugins/` holds seven plugins, each one prompt file that installs itself as a single git commit and uninstalls with `git revert`.
 
 ## The evening
 
